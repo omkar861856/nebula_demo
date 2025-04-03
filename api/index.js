@@ -87,6 +87,7 @@ app.use('*', (req, res) => {
     try {
       // Path to index.html in the public directory
       const indexPath = path.join(__dirname, '../dist/public/index.html');
+      console.log('Serving index.html from:', indexPath);
       
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
