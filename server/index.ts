@@ -68,6 +68,21 @@ if (process.env.NODE_ENV !== 'production' || process.env.VERCEL_ENV === undefine
   });
 })();
 
+} 
+else {
+  // For Vercel, just set up the routes without starting a server
+  (async () => {
+    await registerRoutes(app);
+    
+    app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+      const status = err.status || err.statusCode || 500;
+      const message = err.message || "Internal Server Error";
+      res.status(status).json({ message });
+    });
+    
+    // In production on Vercel, we need static file serving
+    serveStatic(app);
+  })();
 }
 
 export default app;
