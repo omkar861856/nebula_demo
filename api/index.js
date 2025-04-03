@@ -87,23 +87,22 @@ app.use('*', (req, res) => {
     try {
       // Path to index.html in the public directory
       const indexPath = path.join(__dirname, '../dist/public/index.html');
-      console.log('Serving index.html from:', indexPath);
       
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
         // Fallback if file doesn't exist
         res.status(200).send(`
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <title>Your Application</title>
-            </head>
-            <body>
-              <h1>Your Application</h1>
-              <p>Frontend build not found. Please check the deployment logs.</p>
-            </body>
-          </html>
+            <!DOCTYPE html>
+        <html>
+          <head><title>Debugging</title></head>
+          <body>
+            <h1>Debugging Information</h1>
+            <p>Path checked: ${indexPath}</p>
+            <p>Working directory: ${process.cwd()}</p>
+            <p>__dirname: ${__dirname}</p>
+          </body>
+        </html>
         `);
       }
     } catch (error) {
