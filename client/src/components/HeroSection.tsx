@@ -52,7 +52,7 @@ const HeroSection: React.FC = () => {
           </motion.div>
         </div>
         
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center">
+        <div className="absolute bottom-100 left-1/2 transform -translate-x-1/2 text-center">
           <div className="animate-scroll-down">
             <svg className="w-6 h-6 mx-auto text-[#00FF41]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
