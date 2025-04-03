@@ -86,7 +86,7 @@ app.post('/api/newsletter', async (req, res) => {
 app.use('*', (req, res) => {
     try {
       // Path to index.html in the public directory
-      const indexPath = path.join(__dirname, '../public/index.html');
+      const indexPath = path.join(__dirname, '../dist/public/index.html');
       
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
