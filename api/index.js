@@ -1,6 +1,13 @@
 // api/index.js
 import express from 'express';
 import { z } from 'zod';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+// Get current directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Simple in-memory storage
 const storage = {
@@ -75,23 +82,33 @@ app.post('/api/newsletter', async (req, res) => {
   }
 });
 
-// Fallback route to serve static frontend
+// Fallback route to serve the index.html
 app.use('*', (req, res) => {
-  res.status(200).send(`
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>Your Application</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body>
-        <h1>Your Application</h1>
-        <p>The app is working! This is a simple fallback page.</p>
-        <p>For development, please run the app locally.</p>
-      </body>
-    </html>
-  `);
-});
+    try {
+      // Path to index.html in the public directory
+      const indexPath = path.join(__dirname, '../public/index.html');
+      
+      if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+      } else {
+        // Fallback if file doesn't exist
+        res.status(200).send(`
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <title>Your Application</title>
+            </head>
+            <body>
+              <h1>Your Application</h1>
+              <p>Frontend build not found. Please check the deployment logs.</p>
+            </body>
+          </html>
+        `);
+      }
+    } catch (error) {
+      console.error('Error serving frontend:', error);
+      res.status(500).send('Server Error');
+    }
+  });
 
 export default app;

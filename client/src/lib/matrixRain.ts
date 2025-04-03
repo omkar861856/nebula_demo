@@ -14,9 +14,9 @@ export class MatrixRain {
       throw new Error('Could not get canvas context');
     }
     this.ctx = context;
-    
+
     // Matrix characters - use Japanese katakana and numbers
-    const matrixChars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789";
+    const matrixChars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン𓀀𓀁𓀂𓀃𓀄𓀅𓀆𓀇𓀈𓀉𓀊𓀋𓀌𓀍𓀎𓀏0123456789";
     this.characters = matrixChars.split("");
     
     this.resizeCanvas();
