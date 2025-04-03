@@ -36,6 +36,9 @@ app.use((req, res, next) => {
   next();
 });
 
+if (process.env.NODE_ENV !== 'production' || process.env.VERCEL_ENV === undefined) {
+
+
 (async () => {
   const server = await registerRoutes(app);
 
@@ -64,6 +67,8 @@ app.use((req, res, next) => {
     log(`serving on port ${port}`);
   });
 })();
+
+}
 
 export default app;
 
